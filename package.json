@@ -1,0 +1,14 @@
+{
+  "name": "illumeo-monorepo",
+  "version": "1.0.0",
+  "main": "index.js",
+  "private": true,
+  "workspaces": {
+    "packages": [
+      "packages/*"
+    ]
+  },
+  "repository": "git@github.com:mateusmoov/illumeo-monorepo.git",
+  "author": "mateusmoov <mateusvasconcelos4210@gmail.com>",
+  "license": "MIT"
+}
