@@ -1,12 +1,12 @@
 import { PastDaysProps } from './PastDays.types'
 import './PastDays.css'
 
-export const PastDays = ({ date, hour }: PastDaysProps) => {
+export const PastDays = ({ date, time }: PastDaysProps) => {
   return (
     <div className="container">
       <div className="text-container">
-        <span className="date-container">{date}</span>
-        <span className="hour-container">{hour}</span>
+        <span className="date-info">{date}</span>
+        <span className="time-info">{time}</span>
       </div>
     </div>
   )

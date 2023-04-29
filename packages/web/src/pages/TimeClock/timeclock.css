@@ -1,0 +1,57 @@
+section{
+ display: flex;
+ align-items: center;
+ flex-direction: column;
+ min-height: 100vh;
+ max-width: 365px;
+ width: 100%;
+ margin: 0 auto;
+ margin-top: 85px;
+ font-family: 'Montserrat';
+ font-weight: 700;
+ color: #F5F5F5
+}
+
+.time-clock-header{
+ display: flex;
+ justify-content: space-between;
+ width: 100%;
+ font-size: 12px;
+ margin-bottom: 10px;
+}
+
+.time-clock-user{
+ font-weight: 300;
+}
+
+.time-clock-hours{
+ display: flex;
+ width: 100%;
+ flex-direction: column;
+ margin-bottom: 19px;
+ gap: 5px;
+}
+
+.time-clock-time{
+ font-size: 23px;
+}
+
+.time-clock-label{
+ font-size: 12px;
+}
+
+.past-days {
+ width: 100%;
+ margin-top: 19px;
+ font-size: 12px;
+}
+
+.past-days-content > ul {
+ display: flex;
+ flex-direction: column;
+ gap: 7px;
+}
+
+.past-days-label{
+ margin-bottom: 7px;
+}
