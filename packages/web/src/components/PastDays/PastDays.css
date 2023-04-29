@@ -1,0 +1,28 @@
+.container {
+ display: flex;
+ width: 100%;
+ max-width: 365px;
+ padding: 13px 0;
+ font-family: 'Montserrat';
+ font-weight: 700;
+ color: #CFCFCF;
+ font-size: 16px;
+ background: rgba(217, 217, 217, 0.05);
+ border-radius: 4px;
+ outline: none;
+}
+
+.text-container {
+ display: flex;
+ width: 100%;
+ justify-content: space-between;
+ padding: 0 13px;
+}
+
+.date-container {
+ color: #CFCFCF
+}
+
+.hour-container{
+ color: #F5F5F5
+}
