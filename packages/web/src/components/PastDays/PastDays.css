@@ -6,7 +6,7 @@
  font-family: 'Montserrat';
  font-weight: 700;
  color: #CFCFCF;
- font-size: 16px;
+ font-size: 12px;
  background: rgba(217, 217, 217, 0.05);
  border-radius: 4px;
  outline: none;
@@ -19,10 +19,11 @@
  padding: 0 13px;
 }
 
-.date-container {
- color: #CFCFCF
+.date-info {
+ color: #CFCFCF;
+ font-weight: 500;
 }
 
-.hour-container{
+.time-info{
  color: #F5F5F5
 }

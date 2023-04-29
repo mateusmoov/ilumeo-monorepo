@@ -1,5 +1,11 @@
+import { TimeClock } from './pages/TimeClock/TimeClock'
+
 function App() {
-  return <></>
+  return (
+    <>
+      <TimeClock />
+    </>
+  )
 }
 
 export default App
