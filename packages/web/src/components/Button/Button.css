@@ -1,0 +1,16 @@
+.button-confirm {
+ display: flex;
+ justify-content: center;
+ width: 100%;
+ max-width: 365px;
+ padding: 14px 0;
+ font-family: 'Montserrat';
+ font-weight: 700;
+ color: #1E2733;
+ font-size: 16px;
+ background-color: #FE8A00;
+ border: none;
+ outline: none;
+ border-radius: 4px;
+ cursor: pointer;
+}
