@@ -1,7 +1,15 @@
+import { useQuery } from '@tanstack/react-query'
 import { Button } from '../../components/Button'
+import { getUser } from '../../services/api'
+
 import './home.css'
 
 export const Home = () => {
+  const { data } = useQuery({
+    queryKey: ['games'],
+    queryFn: () => getUser('4SXXFMF')
+  })
+
   return (
     <section>
       <div className="container">

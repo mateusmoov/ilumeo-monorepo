@@ -1,9 +1,10 @@
 import express, { Request, Response } from "express";
 import { PrismaClient } from "@prisma/client";
-
+import cors from "cors";
 const prisma = new PrismaClient();
 
 const app = express();
+app.use(cors());
 app.use(express.json());
 
 // Rota para validar se o user code existe no banco de dados

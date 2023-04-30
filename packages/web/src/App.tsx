@@ -1,9 +1,9 @@
-import { TimeClock } from './pages/TimeClock/TimeClock'
+import { Home } from './pages/Home/Home'
 
 function App() {
   return (
     <>
-      <TimeClock />
+      <Home />
     </>
   )
 }
