@@ -10,6 +10,8 @@ export const Home = () => {
     queryFn: () => getUser('4SXXFMF')
   })
 
+  console.log(data)
+
   return (
     <section>
       <div className="container">

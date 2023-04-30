@@ -1,10 +1,14 @@
-import { Home } from './pages/Home/Home'
+import { Home, TimeClock } from './pages'
+import { BrowserRouter, Routes, Route } from 'react-router-dom'
 
 function App() {
   return (
-    <>
-      <Home />
-    </>
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/time-record" element={<TimeClock />} />
+      </Routes>
+    </BrowserRouter>
   )
 }
 
