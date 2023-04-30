@@ -10,11 +10,9 @@ export const Home = () => {
     queryFn: () => getUser('4SXXFMF')
   })
 
-  console.log(data)
-
   return (
     <section>
-      <div className="container">
+      <div className="container-home">
         <p className="title-home">
           Ponto <span className="title-bold">Ilumeo</span>
         </p>
