@@ -30,6 +30,19 @@ export const TimeClock = () => {
     refetchOnWindowFocus: false
   })
 
+  const currentDate = moment().format('YYYY-MM-DD')
+
+  const amountOfTimeInMilliseconds = getTimeRecords.data
+    ?.filter((timeRecord) => {
+      return moment(timeRecord.clockIn).isSame(currentDate, 'day')
+    })
+    .reduce((acc, timeRecord) => {
+      const differenceInMilliseconds = moment(timeRecord.clockOut).diff(moment(timeRecord.clockIn))
+      return acc + differenceInMilliseconds
+    }, 0)
+
+  const amountOfTimeFormatted = moment.utc(amountOfTimeInMilliseconds).format('HH[h] mm[m]')
+
   const postTimeRecord = useMutation({
     mutationFn: (newTimeRecord: string) => statusUserWork(location.state.code, newTimeRecord)
   })
@@ -57,7 +70,7 @@ export const TimeClock = () => {
         </div>
 
         <div className="time-clock-hours">
-          <p className="time-clock-time">00h 00m</p>
+          <p className="time-clock-time">{amountOfTimeFormatted}</p>
           <p className="time-clock-label">Horas de hoje</p>
         </div>
         <Button
