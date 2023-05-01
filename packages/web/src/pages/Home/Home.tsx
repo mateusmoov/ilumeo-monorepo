@@ -1,3 +1,5 @@
+import { ChangeEvent, useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 import { useQuery } from '@tanstack/react-query'
 import { Button } from '../../components/Button'
 import { getUser } from '../../services/api'
@@ -5,10 +7,34 @@ import { getUser } from '../../services/api'
 import './home.css'
 
 export const Home = () => {
-  const { data } = useQuery({
+  const [code, setCode] = useState('')
+  const navigate = useNavigate()
+
+  const getInputValue = (e: ChangeEvent<HTMLInputElement>) => {
+    setCode(e.target.value)
+  }
+
+  const { refetch } = useQuery({
     queryKey: ['games'],
-    queryFn: () => getUser('4SXXFMF')
+    queryFn: () => getUser(code),
+    enabled: false,
+    onSuccess: (data) => {
+      if (data && data === true) {
+        navigate('time-record')
+      } else {
+        alert('Usuário não encontrado')
+      }
+    },
+    onError: (error) => {
+      if (error instanceof Error) {
+        alert('Erro na solicitação')
+      }
+    }
   })
+
+  const getUserData = async () => {
+    await refetch()
+  }
 
   return (
     <section>
@@ -17,10 +43,19 @@ export const Home = () => {
           Ponto <span className="title-bold">Ilumeo</span>
         </p>
         <div className="form-group">
-          <input type="text" className="form-control" placeholder="#4SXXFMF" />
+          <input
+            type="text"
+            className="form-control"
+            placeholder="#4SXXFMF"
+            onChange={getInputValue}
+            maxLength={8}
+            defaultValue="#"
+          />
           <label className="form-label">Código do usuário</label>
         </div>
-        <Button>Confirmar</Button>
+        <Button onClick={getUserData} disabled={false}>
+          Confirmar
+        </Button>
       </div>
     </section>
   )
