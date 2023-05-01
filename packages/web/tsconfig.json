@@ -19,6 +19,6 @@
     "noUnusedParameters": true,
     "noFallthroughCasesInSwitch": true
   },
-  "include": ["src"],
+  "include": ["src", "setup-tests.js", "babel.config.cjs"],
   "references": [{ "path": "./tsconfig.node.json" }]
 }
