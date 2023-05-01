@@ -1,12 +1,21 @@
 import express, { Request, Response } from "express";
 import { PrismaClient } from "@prisma/client";
+import cors from "cors";
 
 const prisma = new PrismaClient();
-
 const app = express();
+
+app.use(cors());
 app.use(express.json());
 
-// Rota para validar se o user code existe no banco de dados
+function sendSuccess(res: Response, data: any) {
+  res.status(200).json(data);
+}
+
+function sendError(res: Response, code: number, message: string) {
+  res.status(code).json({ error: message });
+}
+
 app.get("/users/:code/", async (req: Request, res: Response) => {
   const { code } = req.params;
 
@@ -16,17 +25,16 @@ app.get("/users/:code/", async (req: Request, res: Response) => {
     });
 
     if (user) {
-      res.sendStatus(200);
+      sendSuccess(res, "Usuário encontrado");
     } else {
-      res.sendStatus(404).send("Código não encontrado");
+      sendError(res, 404, "Código não encontrado");
     }
   } catch (error) {
     console.error(error);
-    res.sendStatus(500).send("Erro no servidor, tente novamente mais tarde");
+    sendError(res, 500, "Erro no servidor, tente novamente mais tarde");
   }
 });
 
-// Rota para capturar todos os TimeRecord do determinado user code
 app.get("/users/:code/time-records", async (req: Request, res: Response) => {
   const { code } = req.params;
 
@@ -37,17 +45,16 @@ app.get("/users/:code/time-records", async (req: Request, res: Response) => {
     });
 
     if (user) {
-      res.json(user.timeRecords);
+      sendSuccess(res, user.timeRecords);
     } else {
-      res.sendStatus(404).send("Sem registros encontrados");
+      sendError(res, 404, "Sem registros encontrados");
     }
   } catch (error) {
     console.error(error);
-    res.sendStatus(500).send("Erro no servidor, tente novamente mais tarde");
+    sendError(res, 500, "Erro no servidor, tente novamente mais tarde");
   }
 });
 
-// Rota para iniciar e finalizar o ponto de trabalho
 app.post("/users/:code/work", async (req: Request, res: Response) => {
   const { code } = req.params;
   const { action } = req.body;
@@ -58,7 +65,7 @@ app.post("/users/:code/work", async (req: Request, res: Response) => {
     });
 
     if (!user) {
-      res.sendStatus(404);
+      sendError(res, 404, "Código não encontrado");
       return;
     }
 
@@ -69,7 +76,7 @@ app.post("/users/:code/work", async (req: Request, res: Response) => {
         },
       });
 
-      res.json(timeRecord);
+      sendSuccess(res, timeRecord);
     } else if (action === "stop") {
       const latestTimeRecord = await prisma.timeRecord.findFirst({
         where: {
@@ -87,16 +94,16 @@ app.post("/users/:code/work", async (req: Request, res: Response) => {
           data: { clockOut: new Date() },
         });
 
-        res.json(updatedTimeRecord);
+        sendSuccess(res, updatedTimeRecord);
       } else {
-        res.sendStatus(404);
+        sendError(res, 404, "Nenhum registro encontrado para parar");
       }
     } else {
-      res.status(400).send("Ação inválida");
+      sendError(res, 400, "Ação inválida");
     }
   } catch (error) {
     console.error(error);
-    res.sendStatus(500);
+    sendError(res, 500, "Erro no servidor, tente novamente mais tarde");
   }
 });
 
