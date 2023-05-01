@@ -40,6 +40,10 @@ export const TimeClock = () => {
     })
   }
 
+  const postTimeRecord = useMutation({
+    mutationFn: (newTimeRecord: string) => statusUserWork(location.state.code, newTimeRecord)
+  })
+
   // Funções de data/tempo
   const currentDate = moment().format('YYYY-MM-DD')
 
@@ -53,10 +57,6 @@ export const TimeClock = () => {
     }, 0)
 
   const amountOfTimeFormatted = moment.utc(amountOfTimeInMilliseconds).format('HH[h] mm[m]')
-
-  const postTimeRecord = useMutation({
-    mutationFn: (newTimeRecord: string) => statusUserWork(location.state.code, newTimeRecord)
-  })
 
   const formatDate = (date: string) => {
     const formattedDate = moment.utc(date).local().format('DD/MM/YYYY')
