@@ -107,4 +107,6 @@ app.post("/users/:code/work", async (req: Request, res: Response) => {
   }
 });
 
+export default app;
+
 app.listen(3000, () => console.log("Server is running"));
