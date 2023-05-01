@@ -1,5 +1,5 @@
 export type ButtonProps = {
   children: string
-  onClick: () => void
-  disabled: boolean
+  onClick?: () => void
+  disabled?: boolean
 }
