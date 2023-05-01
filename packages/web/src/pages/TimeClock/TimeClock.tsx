@@ -24,12 +24,23 @@ export const TimeClock = () => {
     }
   }, [isActive])
 
+  //Chamadas de API
   const getTimeRecords = useQuery<TimeRecordType[]>({
     queryKey: ['time-records'],
     queryFn: () => getUserTimeRecords(location.state.code),
     refetchOnWindowFocus: false
   })
 
+  const handleTimeRecordButtonClick = async () => {
+    postTimeRecord.mutate(postTimeRecordValue, {
+      onSuccess: () => {
+        setPostTimeRecordValue(postTimeRecordValue === 'start' ? 'stop' : 'start')
+        setIsActive(!isActive)
+      }
+    })
+  }
+
+  // Funções de data/tempo
   const currentDate = moment().format('YYYY-MM-DD')
 
   const amountOfTimeInMilliseconds = getTimeRecords.data
@@ -73,16 +84,7 @@ export const TimeClock = () => {
           <p className="time-clock-time">{amountOfTimeFormatted}</p>
           <p className="time-clock-label">Horas de hoje</p>
         </div>
-        <Button
-          onClick={() => {
-            postTimeRecord.mutate(postTimeRecordValue, {
-              onSuccess: () => {
-                setPostTimeRecordValue(postTimeRecordValue === 'start' ? 'stop' : 'start')
-                setIsActive(!isActive)
-              }
-            })
-          }}
-        >
+        <Button onClick={handleTimeRecordButtonClick}>
           {isActive ? 'Hora de saida' : 'Hora de entrada'}
         </Button>
         <div className="past-days">
