@@ -20,7 +20,7 @@ export const Home = () => {
     enabled: false,
     onSuccess: (data) => {
       if (data && data === true) {
-        navigate('time-record')
+        navigate('time-record', { state: { code } })
       } else {
         alert('Usuário não encontrado')
       }
