@@ -7,6 +7,8 @@ const api = axios.create({
   }
 })
 
+//'
+
 export const getUser = async (code: string) => {
   try {
     const response = await api.get(`/users/${code}`)
