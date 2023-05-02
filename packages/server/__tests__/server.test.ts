@@ -3,7 +3,7 @@ import app from "../server";
 
 describe("Testes de usuários", () => {
   it("Deve retornar o status 200 e uma mensagem de sucesso quando o usuário é encontrado", async () => {
-    const response = await request(app).get("/users/4SXXFMF");
+    const response = await request(app).get("/users/4SXXFMf");
     expect(response.status).toBe(200);
     expect(response.body).toEqual("Usuário encontrado");
   });
@@ -15,7 +15,7 @@ describe("Testes de usuários", () => {
   });
 
   it("Deve retornar o status 200 e uma lista de registros de tempo para o usuário quando o usuário é encontrado", async () => {
-    const response = await request(app).get("/users/4SXXFMF/time-records");
+    const response = await request(app).get("/users/4SXXFMf/time-records");
     expect(response.status).toBe(200);
     expect(response.body.length).toBeGreaterThan(0);
   });
@@ -28,7 +28,7 @@ describe("Testes de usuários", () => {
 
   it("Deve retornar o status 400 e uma mensagem de erro quando a ação é inválida", async () => {
     const response = await request(app)
-      .post("/users/4SXXFMF/work")
+      .post("/users/4SXXFMf/work")
       .send({ action: "invalida" });
     expect(response.status).toBe(400);
     expect(response.body).toEqual({ error: "Ação inválida" });
@@ -38,7 +38,7 @@ describe("Testes de usuários", () => {
 describe("Testes de tempo de trabalho", () => {
   it("Deve retornar o status 200 e um novo registro de tempo quando a ação é 'start'", async () => {
     const response = await request(app)
-      .post("/users/4SXXFMF/work")
+      .post("/users/4SXXFMf/work")
       .send({ action: "start" });
     expect(response.status).toBe(200);
     expect(response.body.clockIn).not.toBeNull();
@@ -55,7 +55,7 @@ describe("Testes de tempo de trabalho", () => {
 
   it("Deve retornar o status 200 e o registro de tempo atualizado quando a ação é 'stop'", async () => {
     const response = await request(app)
-      .post("/users/4SXXFMF/work")
+      .post("/users/4SXXFMf/work")
       .send({ action: "stop" });
     expect(response.status).toBe(200);
     expect(response.body.userId).toBe("1");
@@ -64,7 +64,7 @@ describe("Testes de tempo de trabalho", () => {
 
   it("Deve retornar o status 404 e uma mensagem de erro quando não há registros para parar", async () => {
     const response = await request(app)
-      .post("/users/4SXXFMF/work")
+      .post("/users/4SXXFMf/work")
       .send({ action: "stop" });
     expect(response.status).toBe(404);
     expect(response.body).toEqual({
