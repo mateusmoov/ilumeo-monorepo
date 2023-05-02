@@ -3,10 +3,11 @@
   "version": "1.0.0",
   "main": "index.js",
   "license": "MIT",
-  "type": "module",
   "scripts": {
-    "start": "npx nodemon server.ts",
-    "test": "jest"
+    "test": "jest",
+    "dev": "npx nodemon server.ts",
+    "build": "tsc",
+    "start": "npx nodemon server.ts"
   },
   "devDependencies": {
     "@types/cors": "^2.8.13",

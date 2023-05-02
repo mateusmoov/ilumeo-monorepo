@@ -1,0 +1,37 @@
+version: '3'
+
+services:
+  postgres:
+    image: postgres:10.3
+    restart: always
+    environment:
+      - POSTGRES_USER=admin
+      - POSTGRES_PASSWORD=admin
+    ports:
+      - '5432:5432'
+
+  web:
+    build: packages/web
+    restart: on-failure
+    ports:
+      - "3001:3001"
+    depends_on:
+      - server
+
+  migration:
+    build: packages/server
+    restart: 'no'
+    depends_on:
+      - postgres
+    command: "npx prisma migrate dev"
+
+  server:
+    build: packages/server
+    restart: always
+    ports:
+      - "3000:3000"
+    depends_on:
+      - postgres
+
+
+
