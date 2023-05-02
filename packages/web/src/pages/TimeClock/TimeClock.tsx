@@ -1,3 +1,4 @@
+import toast, { Toaster } from 'react-hot-toast'
 import { useState, useEffect } from 'react'
 import moment from 'moment'
 import { useLocation } from 'react-router-dom'
@@ -35,6 +36,11 @@ export const TimeClock = () => {
     postTimeRecord.mutate(postTimeRecordValue, {
       onSuccess: () => {
         setPostTimeRecordValue(postTimeRecordValue === 'start' ? 'stop' : 'start')
+        toast.success(
+          `Registro de ponto ${
+            postTimeRecordValue === 'start' ? 'iniciado' : 'finalizado'
+          } com sucesso!`
+        )
         setIsActive(!isActive)
       }
     })
@@ -71,6 +77,7 @@ export const TimeClock = () => {
 
   return (
     <>
+      <Toaster />
       <section className="time-clock-container">
         <div className="time-clock-header">
           <p className="time-clock-title">Relógio de ponto</p>
@@ -84,7 +91,7 @@ export const TimeClock = () => {
           <p className="time-clock-time">{amountOfTimeFormatted}</p>
           <p className="time-clock-label">Horas de hoje</p>
         </div>
-        <Button onClick={handleTimeRecordButtonClick}>
+        <Button onClick={handleTimeRecordButtonClick} disabled={postTimeRecord.isLoading}>
           {isActive ? 'Hora de saida' : 'Hora de entrada'}
         </Button>
         <div className="past-days">

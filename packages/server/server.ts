@@ -21,7 +21,9 @@ app.get("/users/:code/", async (req: Request, res: Response) => {
 
   try {
     const user = await prisma.user.findUnique({
-      where: { code },
+      where: {
+        code,
+      },
     });
 
     if (user) {

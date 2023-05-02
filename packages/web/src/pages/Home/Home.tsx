@@ -15,7 +15,7 @@ export const Home = () => {
     setCode(e.target.value)
   }
 
-  const { refetch } = useQuery({
+  const { isFetching, refetch } = useQuery({
     queryKey: ['games'],
     queryFn: () => getUser(code),
     enabled: false,
@@ -48,14 +48,13 @@ export const Home = () => {
           <input
             type="text"
             className="form-control"
-            placeholder="#4SXXFMF"
+            placeholder="4SXXFMF"
             onChange={getInputValue}
-            maxLength={8}
-            defaultValue="#"
+            maxLength={7}
           />
           <label className="form-label">Código do usuário</label>
         </div>
-        <Button onClick={getUserData} disabled={false}>
+        <Button onClick={getUserData} disabled={isFetching}>
           Confirmar
         </Button>
       </div>
