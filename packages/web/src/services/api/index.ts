@@ -1,7 +1,7 @@
 import axios from 'axios'
 
 const api = axios.create({
-  baseURL: 'http://pontoilumeo.sytes.net:3000',
+  baseURL: 'https://ilumeo-api-render.onrender.com',
   headers: {
     'Access-Control-Allow-Origin': '*'
   }
