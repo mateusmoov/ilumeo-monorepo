@@ -6,6 +6,7 @@ import { Button } from '../../components/Button'
 import { PastDays } from '../../components/PastDays'
 import { useQuery, useMutation } from '@tanstack/react-query'
 import { getUserTimeRecords, statusUserWork } from '../../services/api'
+import { ClipLoader } from 'react-spinners'
 import './timeclock.css'
 
 type TimeRecordType = {
@@ -100,21 +101,25 @@ export const TimeClock = () => {
         </Button>
         <div className="past-days">
           <p className="past-days-label">Dias anteriores</p>
-          <div className="past-days-content">
-            <ul>
-              {Array.isArray(validTimeRecords) && validTimeRecords.length > 0 ? (
-                validTimeRecords?.map((item, index) => (
+          {getTimeRecords.isLoading ? (
+            <div className="loading-container">
+              <ClipLoader size={35} color={'#fff'} loading={getTimeRecords.isLoading} />
+            </div>
+          ) : validTimeRecords && validTimeRecords.length > 0 ? (
+            <div className="past-days-content">
+              <ul>
+                {validTimeRecords?.map((item, index) => (
                   <PastDays
                     date={formatDate(item.clockIn)}
                     time={formatHour(item.clockIn, item.clockOut)}
                     key={index}
                   />
-                ))
-              ) : (
-                <p className="past-days-empty">Nenhum registro encontrado😔</p>
-              )}
-            </ul>
-          </div>
+                ))}
+              </ul>
+            </div>
+          ) : (
+            <p className="past-days-empty">Nenhum registro encontrado 😔</p>
+          )}
         </div>
       </section>
     </>
