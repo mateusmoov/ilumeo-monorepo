@@ -1,5 +1,5 @@
 import toast, { Toaster } from 'react-hot-toast'
-import { ChangeEvent, useState } from 'react'
+import { ChangeEvent, useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useQuery } from '@tanstack/react-query'
 import { Button } from '../../components/Button'
@@ -15,12 +15,20 @@ export const Home = () => {
     setCode(e.target.value)
   }
 
+  useEffect(() => {
+    const savedCode = localStorage.getItem('userCode')
+    if (savedCode) {
+      navigate('time-record', { state: { code: savedCode } })
+    }
+  }, [])
+
   const { isFetching, refetch } = useQuery({
     queryKey: ['games'],
     queryFn: () => getUser(code),
     enabled: false,
     onSuccess: (data) => {
       if (data && data === true) {
+        localStorage.setItem('userCode', code)
         navigate('time-record', { state: { code } })
       } else {
         toast.error('Usuário não encontrado')
