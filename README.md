@@ -27,7 +27,7 @@ Você pode testar a aplicação em produção clicando [aqui](http://pontoilumeo
 ## Documentações
 
 - [Desafio](./DOCUMENTATION/CHALLENGE.md) - Challenge
-- [Roadmap](./DOCUMENTATION/API.md) - API docs
+- [Roadmap](./DOCUMENTATION/ROADMAP.md) - Roadmap
 
 #### Production
 
