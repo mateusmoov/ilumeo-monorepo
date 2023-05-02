@@ -1,3 +1,4 @@
+import toast, { Toaster } from 'react-hot-toast'
 import { useState, useEffect } from 'react'
 import moment from 'moment'
 import { useLocation } from 'react-router-dom'
@@ -5,6 +6,7 @@ import { Button } from '../../components/Button'
 import { PastDays } from '../../components/PastDays'
 import { useQuery, useMutation } from '@tanstack/react-query'
 import { getUserTimeRecords, statusUserWork } from '../../services/api'
+import { ClipLoader } from 'react-spinners'
 import './timeclock.css'
 
 type TimeRecordType = {
@@ -35,6 +37,11 @@ export const TimeClock = () => {
     postTimeRecord.mutate(postTimeRecordValue, {
       onSuccess: () => {
         setPostTimeRecordValue(postTimeRecordValue === 'start' ? 'stop' : 'start')
+        toast.success(
+          `Registro de ponto ${
+            postTimeRecordValue === 'start' ? 'iniciado' : 'finalizado'
+          } com sucesso!`
+        )
         setIsActive(!isActive)
       }
     })
@@ -44,10 +51,14 @@ export const TimeClock = () => {
     mutationFn: (newTimeRecord: string) => statusUserWork(location.state.code, newTimeRecord)
   })
 
+  const validTimeRecords = getTimeRecords.data?.filter((record) => {
+    return record.clockOut
+  })
+
   // Funções de data/tempo
   const currentDate = moment().format('YYYY-MM-DD')
 
-  const amountOfTimeInMilliseconds = getTimeRecords.data
+  const amountOfTimeInMilliseconds = validTimeRecords
     ?.filter((timeRecord) => {
       return moment(timeRecord.clockIn).isSame(currentDate, 'day')
     })
@@ -71,7 +82,8 @@ export const TimeClock = () => {
 
   return (
     <>
-      <section>
+      <Toaster />
+      <section className="time-clock-container">
         <div className="time-clock-header">
           <p className="time-clock-title">Relógio de ponto</p>
           <div className="time-clock-user-info">
@@ -84,23 +96,30 @@ export const TimeClock = () => {
           <p className="time-clock-time">{amountOfTimeFormatted}</p>
           <p className="time-clock-label">Horas de hoje</p>
         </div>
-        <Button onClick={handleTimeRecordButtonClick}>
+        <Button onClick={handleTimeRecordButtonClick} disabled={postTimeRecord.isLoading}>
           {isActive ? 'Hora de saida' : 'Hora de entrada'}
         </Button>
         <div className="past-days">
           <p className="past-days-label">Dias anteriores</p>
-          <div className="past-days-content">
-            <ul>
-              {Array.isArray(getTimeRecords.data) &&
-                getTimeRecords.data.map((item, index) => (
+          {getTimeRecords.isLoading ? (
+            <div className="loading-container">
+              <ClipLoader size={35} color={'#fff'} loading={getTimeRecords.isLoading} />
+            </div>
+          ) : validTimeRecords && validTimeRecords.length > 0 ? (
+            <div className="past-days-content">
+              <ul>
+                {validTimeRecords?.map((item, index) => (
                   <PastDays
                     date={formatDate(item.clockIn)}
                     time={formatHour(item.clockIn, item.clockOut)}
                     key={index}
                   />
                 ))}
-            </ul>
-          </div>
+              </ul>
+            </div>
+          ) : (
+            <p className="past-days-empty">Nenhum registro encontrado 😔</p>
+          )}
         </div>
       </section>
     </>

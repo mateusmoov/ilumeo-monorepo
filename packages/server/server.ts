@@ -4,6 +4,7 @@ import cors from "cors";
 
 const prisma = new PrismaClient();
 const app = express();
+const port = 3000;
 
 app.use(cors());
 app.use(express.json());
@@ -21,7 +22,9 @@ app.get("/users/:code/", async (req: Request, res: Response) => {
 
   try {
     const user = await prisma.user.findUnique({
-      where: { code },
+      where: {
+        code,
+      },
     });
 
     if (user) {
@@ -109,4 +112,8 @@ app.post("/users/:code/work", async (req: Request, res: Response) => {
 
 export default app;
 
-app.listen(3000, () => console.log("Server is running"));
+if (process.env.NODE_ENV !== "test") {
+  app.listen(port, () => {
+    console.log(`Server listening on port ${port}`);
+  });
+}

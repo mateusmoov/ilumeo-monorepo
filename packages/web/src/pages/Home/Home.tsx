@@ -1,4 +1,5 @@
-import { ChangeEvent, useState } from 'react'
+import toast, { Toaster } from 'react-hot-toast'
+import { ChangeEvent, useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useQuery } from '@tanstack/react-query'
 import { Button } from '../../components/Button'
@@ -14,20 +15,28 @@ export const Home = () => {
     setCode(e.target.value)
   }
 
-  const { refetch } = useQuery({
+  useEffect(() => {
+    const savedCode = localStorage.getItem('userCode')
+    if (savedCode) {
+      navigate('time-record', { state: { code: savedCode } })
+    }
+  }, [])
+
+  const { isFetching, refetch } = useQuery({
     queryKey: ['games'],
     queryFn: () => getUser(code),
     enabled: false,
     onSuccess: (data) => {
       if (data && data === true) {
+        localStorage.setItem('userCode', code)
         navigate('time-record', { state: { code } })
       } else {
-        alert('Usuário não encontrado')
+        toast.error('Usuário não encontrado')
       }
     },
     onError: (error) => {
       if (error instanceof Error) {
-        alert('Erro na solicitação')
+        toast.error('Erro na solicitação')
       }
     }
   })
@@ -38,6 +47,7 @@ export const Home = () => {
 
   return (
     <section>
+      <Toaster />
       <div className="container-home">
         <p className="title-home">
           Ponto <span className="title-bold">Ilumeo</span>
@@ -46,14 +56,13 @@ export const Home = () => {
           <input
             type="text"
             className="form-control"
-            placeholder="#4SXXFMF"
+            placeholder="4SXXFMF"
             onChange={getInputValue}
-            maxLength={8}
-            defaultValue="#"
+            maxLength={7}
           />
           <label className="form-label">Código do usuário</label>
         </div>
-        <Button onClick={getUserData} disabled={false}>
+        <Button onClick={getUserData} disabled={isFetching}>
           Confirmar
         </Button>
       </div>

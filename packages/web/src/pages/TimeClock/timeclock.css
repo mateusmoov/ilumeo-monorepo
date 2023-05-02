@@ -1,15 +1,14 @@
-section{
+.time-clock-container{
  display: flex;
  align-items: center;
  flex-direction: column;
- min-height: 100vh;
  max-width: 365px;
  width: 100%;
  margin: 0 auto;
  margin-top: 85px;
  font-family: 'Montserrat';
  font-weight: 700;
- color: #F5F5F5
+ color: #F5F5F5;
 }
 
 .time-clock-header{
@@ -54,4 +53,15 @@ section{
 
 .past-days-label{
  margin-bottom: 7px;
+}
+
+.past-days-empty{
+ margin-top: 15px;
+ display: flex;
+ justify-content: center;
+ font-weight: 400;
+}
+
+.loading-container{
+ text-align: center;
 }

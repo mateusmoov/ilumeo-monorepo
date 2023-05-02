@@ -4,7 +4,7 @@
   "main": "index.js",
   "license": "MIT",
   "scripts": {
-    "test": "jest",
+    "test": "set PORT=0&&jest --watchAll --verbose --detectOpenHandles",
     "dev": "npx nodemon server.ts",
     "build": "tsc",
     "start": "npx nodemon server.ts"
