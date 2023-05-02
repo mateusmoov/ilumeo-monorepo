@@ -1,5 +1,3 @@
-# Ponto Ilumeo
-
 <div align="center">
   <h1 align="center">Ponto Ilumeo</h1>
 
