@@ -4,8 +4,6 @@
 ![enter image description here](https://i.imgur.com/ZPNmAUZ.png)
 
   <p align="center">
-    Upload transactions to App
-    <br />
     <a href="/DOCUMENTATION/CHALLENGE.md">Challenge</a>
     ·
     <a href="/DOCUMENTATION/ROADMAP.md">Roadmap</a>
