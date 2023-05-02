@@ -37,9 +37,9 @@ Prerequisites
 - docker-compose
 
 1. Rode `docker-compose up -d --build` na pasta root do projeto.
-2. Frontend rodando no `localhost:3001`, backend rodando no localhost:3000
+2. Frontend rodando no `localhost:3001`, backend rodando no `localhost:3000`
 
-### Test
+### Testes
 Depois de ter rodado o comando sudo `docker-compose up --build`: 
 
 #### Front
