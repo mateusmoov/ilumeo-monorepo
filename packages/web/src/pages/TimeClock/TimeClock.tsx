@@ -50,10 +50,14 @@ export const TimeClock = () => {
     mutationFn: (newTimeRecord: string) => statusUserWork(location.state.code, newTimeRecord)
   })
 
+  const validTimeRecords = getTimeRecords.data?.filter((record) => {
+    return record.clockOut
+  })
+
   // Funções de data/tempo
   const currentDate = moment().format('YYYY-MM-DD')
 
-  const amountOfTimeInMilliseconds = getTimeRecords.data
+  const amountOfTimeInMilliseconds = validTimeRecords
     ?.filter((timeRecord) => {
       return moment(timeRecord.clockIn).isSame(currentDate, 'day')
     })
@@ -98,8 +102,8 @@ export const TimeClock = () => {
           <p className="past-days-label">Dias anteriores</p>
           <div className="past-days-content">
             <ul>
-              {Array.isArray(getTimeRecords.data) &&
-                getTimeRecords.data.map((item, index) => (
+              {Array.isArray(validTimeRecords) &&
+                validTimeRecords?.map((item, index) => (
                   <PastDays
                     date={formatDate(item.clockIn)}
                     time={formatHour(item.clockIn, item.clockOut)}
