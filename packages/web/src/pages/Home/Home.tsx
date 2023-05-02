@@ -1,3 +1,4 @@
+import toast, { Toaster } from 'react-hot-toast'
 import { ChangeEvent, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useQuery } from '@tanstack/react-query'
@@ -22,12 +23,12 @@ export const Home = () => {
       if (data && data === true) {
         navigate('time-record', { state: { code } })
       } else {
-        alert('Usuário não encontrado')
+        toast.error('Usuário não encontrado')
       }
     },
     onError: (error) => {
       if (error instanceof Error) {
-        alert('Erro na solicitação')
+        toast.error('Erro na solicitação')
       }
     }
   })
@@ -38,6 +39,7 @@ export const Home = () => {
 
   return (
     <section>
+      <Toaster />
       <div className="container-home">
         <p className="title-home">
           Ponto <span className="title-bold">Ilumeo</span>

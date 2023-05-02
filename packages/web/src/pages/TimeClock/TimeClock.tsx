@@ -71,7 +71,7 @@ export const TimeClock = () => {
 
   return (
     <>
-      <section>
+      <section className="time-clock-container">
         <div className="time-clock-header">
           <p className="time-clock-title">Relógio de ponto</p>
           <div className="time-clock-user-info">
