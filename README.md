@@ -39,10 +39,14 @@ Prerequisites
 1. Rode `docker-compose up -d --build` na pasta root do projeto.
 2. Frontend rodando no `localhost:3001`, backend rodando no localhost:3000
 
-#### Test
+### Test
+Depois de ter rodado o comando sudo `docker-compose up --build`: 
 
+#### Front
 - Vá para a pasta do front-end `/packages/web` e rode o comando `yarn && yarn test`
-- Vá para a pasta do back-end `/packages/server` e rode o comando `yarn && yarn test`
+#### Back
+- Adicione o code `4SXXFMf` na tabela de User no banco de dados.
+- Vá para a pasta do back-end `/packages/server` e rode o comando `npx prisma generate && yarn && yarn test`
 
 ## Contact
 
