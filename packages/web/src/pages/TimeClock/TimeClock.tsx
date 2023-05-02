@@ -102,14 +102,17 @@ export const TimeClock = () => {
           <p className="past-days-label">Dias anteriores</p>
           <div className="past-days-content">
             <ul>
-              {Array.isArray(validTimeRecords) &&
+              {Array.isArray(validTimeRecords) && validTimeRecords.length > 0 ? (
                 validTimeRecords?.map((item, index) => (
                   <PastDays
                     date={formatDate(item.clockIn)}
                     time={formatHour(item.clockIn, item.clockOut)}
                     key={index}
                   />
-                ))}
+                ))
+              ) : (
+                <p className="past-days-empty">Nenhum registro encontrado😔</p>
+              )}
             </ul>
           </div>
         </div>

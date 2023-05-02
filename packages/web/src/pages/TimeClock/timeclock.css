@@ -54,3 +54,10 @@
 .past-days-label{
  margin-bottom: 7px;
 }
+
+.past-days-empty{
+ margin-top: 15px;
+ display: flex;
+ justify-content: center;
+ font-weight: 400;
+}
