@@ -41,8 +41,8 @@ Prerequisites
 
 #### Test
 
-- Vá para a pasta do front-end `/packages/web` e rode o comando `yarn test`
-- Vá para a pasta do back-end `/packages/server` e rode o comando `yarn test`
+- Vá para a pasta do front-end `/packages/web` e rode o comando `yarn && yarn test`
+- Vá para a pasta do back-end `/packages/server` e rode o comando `yarn && yarn test`
 
 ## Contact
 
