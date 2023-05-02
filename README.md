@@ -14,7 +14,7 @@
 
 O projeto tem como objetivo de realizar o controle de ponto dos colaboradores da Ilumeo e permitir que eles tenham visibilidade das suas horas trabalhadas.
 
-Você pode testar a aplicação em produção clicando [aqui](http://pontoilumeo.sytes.net/) e colocar o code `4SXXFMf`.
+Você pode testar a aplicação em produção clicando [aqui](https://illumeo-monorepo-web-rho.vercel.app/) e colocar o code `4SXXFMf`.
 
 ### Desenvolvido com
 
