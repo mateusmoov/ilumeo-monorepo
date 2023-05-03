@@ -1,7 +1,7 @@
 import axios from 'axios'
 
 const api = axios.create({
-  baseURL: 'https://ilumeo-api-lbb3.onrender.com/',
+  baseURL: 'https://pontoillumeo-api.vercel.app/',
   headers: {
     'Access-Control-Allow-Origin': '*'
   }
