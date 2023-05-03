@@ -7,7 +7,8 @@
     "test": "set PORT=0&&jest --watchAll --verbose --detectOpenHandles",
     "dev": "npx nodemon server.ts",
     "build": "tsc",
-    "start": "npx nodemon server.ts"
+    "start": "npx nodemon server.ts",
+    "vercel-build": "npx prisma migrate deploy"
   },
   "devDependencies": {
     "@types/cors": "^2.8.13",
